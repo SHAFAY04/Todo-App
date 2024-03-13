@@ -34,6 +34,7 @@ public class HomePage extends javax.swing.JFrame {
    javax.swing.JLabel[] TaskDates= new javax.swing.JLabel[8];
    javax.swing.JLabel[] Assigned= new javax.swing.JLabel[8];
    String[] discriptions= new String[8];
+   String assignedBy;
    
     /**
      * Creates new form HomePage
@@ -118,7 +119,7 @@ public class HomePage extends javax.swing.JFrame {
             String taskname = rs.getString("taskname");
             String taskdis = rs.getString("taskdis");
             String taskdatetime= rs.getString("taskdatetime");
-            String assignedBy = rs.getString("assignedBy");
+            assignedBy = rs.getString("assignedBy");
             String assignedTo = rs.getString("username");
             
             
@@ -1011,7 +1012,7 @@ AssignedTasks.setPreferredSize(new java.awt.Dimension(151, 33));
             String taskname = rs.getString("taskname");
             String taskdis = rs.getString("taskdis");
             String taskdatetime= rs.getString("taskdatetime");
-            String assignedBy = rs.getString("assignedBy");
+            assignedBy = rs.getString("assignedBy");
             String assignedTo = rs.getString("username");
             
             
@@ -1219,14 +1220,14 @@ else{
     private void TaskDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TaskDoneActionPerformed
         Tasks[0].setVisible(false);
         pop(0, task1name.getText());
-       
+        
     }//GEN-LAST:event_TaskDoneActionPerformed
 
     private void TaskDone1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TaskDone1ActionPerformed
         
         Tasks[1].setVisible(false);
        pop(1, task2name.getText());
-       
+      
     }//GEN-LAST:event_TaskDone1ActionPerformed
 
     private void TaskDone2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TaskDone2ActionPerformed
@@ -1244,6 +1245,7 @@ else{
     private void TaskDone4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TaskDone4ActionPerformed
         Tasks[4].setVisible(false);
        pop(4,task5name.getText());
+      
     }//GEN-LAST:event_TaskDone4ActionPerformed
 
     private void TaskDone5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TaskDone5ActionPerformed
@@ -1270,25 +1272,21 @@ else{
     } catch (Exception e) {
         System.out.println(e);
     }
-
-    for (int i = 0 ; i < top; i++) {
-        Tasks[index] = null;
-    }
-
+    
+ Tasks=newArrayAfterRemoving(Tasks[index]);
    
 
 } 
-    javax.swing.JPanel[] newArrayAfterRemoving(javax.swing.JPanel[] Tasks, javax.swing.JPanel TaskToBeRemoved) {
+    javax.swing.JPanel[] newArrayAfterRemoving(javax.swing.JPanel TaskToBeRemoved) {
     int newLength = Tasks.length - 1;
     javax.swing.JPanel[] newArray = new javax.swing.JPanel[newLength];
 
     int j = 0;
     for (int i = 0; i < Tasks.length; i++) {
-        if (Tasks[i] != TaskToBeRemoved) {
-            newArray[j] = Tasks[i];
-            j++;
+        if (Tasks[i] == TaskToBeRemoved) {
+            continue;
         }
-        
+        newArray[j++] = Tasks[i];
     }
         
     return newArray;
