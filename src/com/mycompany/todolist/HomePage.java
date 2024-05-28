@@ -1,6 +1,7 @@
 
 package com.mycompany.todolist;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -231,7 +232,7 @@ public class HomePage extends javax.swing.JFrame {
 
         FooterLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         FooterLabel.setForeground(new java.awt.Color(255, 255, 255));
-        FooterLabel.setText("© TODO LIST APP BY SHAFAY AND SHAEEL!");
+        FooterLabel.setText("© TODO LIST APP BY SHAFAY");
 
         javax.swing.GroupLayout FooterPanelLayout = new javax.swing.GroupLayout(FooterPanel);
         FooterPanel.setLayout(FooterPanelLayout);
@@ -250,7 +251,21 @@ public class HomePage extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        userIcon.setBackground(new java.awt.Color(255, 255, 255));
         userIcon.setText(username);
+        userIcon.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        userIcon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        userIcon.setMaximumSize(new java.awt.Dimension(72, 30));
+        userIcon.setMinimumSize(new java.awt.Dimension(72, 30));
+        userIcon.setPreferredSize(new java.awt.Dimension(150, 50));
+        userIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                userIconMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                userIconMouseExited(evt);
+            }
+        });
 
         Nav.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -871,8 +886,8 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPagePaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(WelcomeLabel)
-                .addGap(242, 242, 242)
-                .addComponent(userIcon)
+                .addGap(160, 160, 160)
+                .addComponent(userIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(86, 86, 86))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPagePaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -884,12 +899,12 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(loginPagePaneLayout.createSequentialGroup()
                 .addGroup(loginPagePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(loginPagePaneLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(WelcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(loginPagePaneLayout.createSequentialGroup()
                         .addGap(40, 40, 40)
-                        .addComponent(userIcon)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(userIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPagePaneLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(WelcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(welcomeAndFormSeperator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(Nav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -909,7 +924,7 @@ public class HomePage extends javax.swing.JFrame {
                 .addComponent(Task7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Task8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(FooterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1263,6 +1278,23 @@ else{
        pop(7,task8name.getText());
        
     }//GEN-LAST:event_TaskDone7ActionPerformed
+
+    private void userIconMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userIconMouseEntered
+        // TODO add your handling code here:
+      PersonalTasks.setBackground(new java.awt.Color(204, 204, 255));
+
+
+userIcon.setFont(new java.awt.Font("Segoe UI", 3, 21));
+
+    }//GEN-LAST:event_userIconMouseEntered
+
+    private void userIconMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userIconMouseExited
+
+        userIcon.setBackground(new java.awt.Color(255, 255, 255));
+        userIcon.setFont(new java.awt.Font("Segoe UI", 3, 15));
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userIconMouseExited
 
    private void pop(int index, String text) {
     try {
