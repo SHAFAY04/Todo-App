@@ -52,6 +52,9 @@ public class HomePage extends javax.swing.JFrame {
         this.TaskDates=  new javax.swing.JLabel[]{TaskDate,TaskDate1,TaskDate2,TaskDate3,TaskDate4,TaskDate5,TaskDate6,TaskDate7};
         this.Assigned=  new javax.swing.JLabel[]{AssignedBy,AssignedBy1,AssignedBy2,AssignedBy3,AssignedBy4,AssignedBy5,AssignedBy6,AssignedBy7};
 
+        task= new Tasks[8];
+               assignedtask = new Tasks[8];
+               
         setAllTasksInvisible();
                
                 TaskDone.setVisible(true);
