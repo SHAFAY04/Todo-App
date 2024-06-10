@@ -30,10 +30,10 @@ public class HomePage extends javax.swing.JFrame {
    Tasks[] task;
    Tasks[] assignedtask;
    
-   javax.swing.JPanel[] Tasks;
-   javax.swing.JLabel[] TaskNames ;
-   javax.swing.JLabel[] TaskDates;
-   javax.swing.JLabel[] Assigned;
+   javax.swing.JPanel[] Tasks = new javax.swing.JPanel[8];
+   javax.swing.JLabel[] TaskNames = new javax.swing.JLabel[8];
+   javax.swing.JLabel[] TaskDates= new javax.swing.JLabel[8];
+   javax.swing.JLabel[] Assigned= new javax.swing.JLabel[8];
    String[] discriptions= new String[8];
    String assignedBy;
    
@@ -41,15 +41,48 @@ public class HomePage extends javax.swing.JFrame {
      * Creates new form HomePage
      */
     public HomePage(String username) {
-        this.Tasks = new javax.swing.JPanel[]{Task1, Task2, Task3, Task4, Task5, Task6, Task7, Task8};
-        this.TaskNames=  new javax.swing.JLabel[]{task1name,task2name,task3name,task4name,task5name,task6name,task7name,task8name};
-        this.TaskDates=  new javax.swing.JLabel[]{TaskDate,TaskDate1,TaskDate2,TaskDate3,TaskDate4,TaskDate5,TaskDate6,TaskDate7};
-        this.Assigned=  new javax.swing.JLabel[]{AssignedBy,AssignedBy1,AssignedBy2,AssignedBy3,AssignedBy4,AssignedBy5,AssignedBy6,AssignedBy7};
         this.username=username;
         this.top=-1;
          this.top2=-1;
         initComponents();
-      
+        
+        Tasks[0]= Task1;
+        Tasks[1]= Task2;
+        Tasks[2]= Task3;
+        Tasks[3]= Task4;
+        Tasks[4]= Task5;
+        Tasks[5]= Task6;
+        Tasks[6]= Task7;
+        Tasks[7]= Task8;
+    
+        TaskNames[0]= task1name;
+        TaskNames[1]= task2name;
+        TaskNames[2]= task3name;
+        TaskNames[3]= task4name;
+        TaskNames[4]= task5name;
+        TaskNames[5]= task6name;
+        TaskNames[6]= task7name;
+        TaskNames[7]= task8name;
+        
+        TaskDates[0]=TaskDate;
+        TaskDates[1]=TaskDate1;
+        TaskDates[2]=TaskDate2;
+        TaskDates[3]=TaskDate3;
+        TaskDates[4]=TaskDate4;
+        TaskDates[5]=TaskDate5;
+        TaskDates[6]=TaskDate6;
+        TaskDates[7]=TaskDate7;
+        
+        Assigned[0]= AssignedBy;
+        Assigned[1]= AssignedBy1;
+        Assigned[2]= AssignedBy2;
+        Assigned[3]= AssignedBy3;
+        Assigned[4]= AssignedBy4;
+        Assigned[5]= AssignedBy5;
+        Assigned[6]= AssignedBy6;
+        Assigned[7]= AssignedBy7;
+        
+           
                Tasks[0].setVisible(false);
                Tasks[1].setVisible(false);
                Tasks[2].setVisible(false);
@@ -72,7 +105,7 @@ public class HomePage extends javax.swing.JFrame {
             
             Conn c= new Conn();
             
-            String query= "select * from task where username = '"+username+"'";
+            String query= "select * from task where assignedTo = '"+username+"'";
             
             
             ResultSet rs= c.s.executeQuery(query);
