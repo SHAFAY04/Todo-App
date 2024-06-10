@@ -44,6 +44,7 @@ public class HomePage extends javax.swing.JFrame {
         this.username=username;
         this.top=-1;
          this.top2=-1;
+         
         initComponents();
         
         this.Tasks = new javax.swing.JPanel[]{Task1, Task2, Task3, Task4, Task5, Task6, Task7, Task8};
@@ -51,15 +52,7 @@ public class HomePage extends javax.swing.JFrame {
         this.TaskDates=  new javax.swing.JLabel[]{TaskDate,TaskDate1,TaskDate2,TaskDate3,TaskDate4,TaskDate5,TaskDate6,TaskDate7};
         this.Assigned=  new javax.swing.JLabel[]{AssignedBy,AssignedBy1,AssignedBy2,AssignedBy3,AssignedBy4,AssignedBy5,AssignedBy6,AssignedBy7};
 
-      
-               Tasks[0].setVisible(false);
-               Tasks[1].setVisible(false);
-               Tasks[2].setVisible(false);
-               Tasks[3].setVisible(false);
-               Tasks[4].setVisible(false);
-               Tasks[5].setVisible(false);
-               Tasks[6].setVisible(false);
-               Tasks[7].setVisible(false);
+        setAllTasksInvisible();
                
                 TaskDone.setVisible(true);
         TaskDone1.setVisible(true);
@@ -1359,4 +1352,11 @@ userIcon.setFont(new java.awt.Font("Segoe UI", 3, 21));
     private javax.swing.JLabel userIcon;
     private javax.swing.JSeparator welcomeAndFormSeperator;
     // End of variables declaration//GEN-END:variables
+
+    private void setAllTasksInvisible() {
+        
+        for(int i=0; i<Tasks.length;i++){
+            Tasks[i].setVisible(false);
+        }
+    }
 }
