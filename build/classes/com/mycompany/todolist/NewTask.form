@@ -60,8 +60,8 @@
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-            <LineBorder roundedCorners="true" thickness="8">
-              <Color PropertyName="color" blue="33" green="33" red="33" type="rgb"/>
+            <LineBorder thickness="8">
+              <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
             </LineBorder>
           </Border>
         </Property>

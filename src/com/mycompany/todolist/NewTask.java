@@ -14,7 +14,9 @@ public class NewTask extends javax.swing.JFrame {
     
     
      String username;
-     HomePage home = new HomePage(username);
+     String organization;
+     String role;
+     
 
     /**
      * Creates new form NewTask
@@ -30,9 +32,9 @@ public class NewTask extends javax.swing.JFrame {
         ErrorText.setHorizontalAlignment(ErrorText.CENTER);
         
         this.username=username;
-        
-        
-        
+        this.organization=organization;
+        this.role=role;
+       
     }
 
     /**
@@ -63,7 +65,7 @@ public class NewTask extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         SignUpPane.setBackground(new java.awt.Color(204, 204, 255));
-        SignUpPane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 51, 51), 8, true));
+        SignUpPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 8));
 
         TaskNameLabel.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         TaskNameLabel.setText("Task Name");
@@ -194,7 +196,7 @@ public class NewTask extends javax.swing.JFrame {
           
         
             setVisible(false);
-            new HomePage(username).setVisible(true);
+            new HomePage(username, organization, role).setVisible(true);
         }
         catch(Exception e){
             System.out.println(e);

@@ -17,9 +17,11 @@ public class userDeets extends javax.swing.JFrame {
      * Creates new form userDeets
      
     */
+    String fullName;
     String username;
-    public userDeets(String username) {
+    public userDeets(String username,String fullName) {
         this.username=username;
+        this.fullName=fullName;
         initComponents();
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -27,6 +29,18 @@ public class userDeets extends javax.swing.JFrame {
         // Set the location of the JFrame in the center of the screen
         setLocation((screenSize.width - getWidth()) / 2,
                            (screenSize.height - getHeight()) / 2);
+        
+        valueCombo.addItem("first name");
+        valueCombo.addItem("last name");
+                valueCombo.addItem("password");
+        valueCombo.addItem("email");
+        
+        changeLabel.setVisible(false);
+        valueCombo.setVisible(false);
+        GoButton.setVisible(false);
+        changeButton.setVisible(false);
+        FirstName.setVisible(false);
+        FirstNameField.setVisible(false);
     }
 
     /**
@@ -41,6 +55,15 @@ public class userDeets extends javax.swing.JFrame {
         TaskNameLabel = new javax.swing.JLabel();
         userDeetsPane = new javax.swing.JPanel();
         TaskNameLabel1 = new javax.swing.JLabel();
+        ChangeDetailsButton = new javax.swing.JButton();
+        ViewOrganizationButton = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        valueCombo = new javax.swing.JComboBox<>();
+        changeLabel = new javax.swing.JLabel();
+        GoButton = new javax.swing.JButton();
+        FirstName = new javax.swing.JLabel();
+        FirstNameField = new javax.swing.JTextField();
+        changeButton = new javax.swing.JButton();
 
         TaskNameLabel.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         TaskNameLabel.setText("Task Name");
@@ -50,23 +73,134 @@ public class userDeets extends javax.swing.JFrame {
         userDeetsPane.setBackground(new java.awt.Color(204, 204, 255));
 
         TaskNameLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        TaskNameLabel1.setText(username);
+        TaskNameLabel1.setText(fullName);
+
+        ChangeDetailsButton.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        ChangeDetailsButton.setText("Change Details!");
+        ChangeDetailsButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        ChangeDetailsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ChangeDetailsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChangeDetailsButtonActionPerformed(evt);
+            }
+        });
+
+        ViewOrganizationButton.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        ViewOrganizationButton.setText("View Organization! ");
+        ViewOrganizationButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        ViewOrganizationButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ViewOrganizationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewOrganizationButtonActionPerformed(evt);
+            }
+        });
+
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+
+        valueCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { ""}));
+        valueCombo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        valueCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                valueComboActionPerformed(evt);
+            }
+        });
+
+        changeLabel.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        changeLabel.setText("Value to Change:");
+
+        GoButton.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        GoButton.setText("Go!");
+        GoButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        GoButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        GoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GoButtonActionPerformed(evt);
+            }
+        });
+
+        FirstName.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        FirstName.setText("New First Name");
+
+        FirstNameField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        FirstNameField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        changeButton.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        changeButton.setText("change!");
+        changeButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        changeButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        changeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout userDeetsPaneLayout = new javax.swing.GroupLayout(userDeetsPane);
         userDeetsPane.setLayout(userDeetsPaneLayout);
         userDeetsPaneLayout.setHorizontalGroup(
             userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userDeetsPaneLayout.createSequentialGroup()
-                .addContainerGap(248, Short.MAX_VALUE)
-                .addComponent(TaskNameLabel1)
-                .addGap(152, 152, 152))
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(userDeetsPaneLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(changeLabel))
+                    .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(TaskNameLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(19, 19, 19))
+            .addGroup(userDeetsPaneLayout.createSequentialGroup()
+                .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(userDeetsPaneLayout.createSequentialGroup()
+                        .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(userDeetsPaneLayout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(ChangeDetailsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userDeetsPaneLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(valueCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)))
+                        .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ViewOrganizationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(GoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(userDeetsPaneLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(userDeetsPaneLayout.createSequentialGroup()
+                                .addComponent(FirstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(changeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(FirstName))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         userDeetsPaneLayout.setVerticalGroup(
             userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userDeetsPaneLayout.createSequentialGroup()
-                .addGap(70, 70, 70)
+                .addGap(76, 76, 76)
                 .addComponent(TaskNameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(462, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(userDeetsPaneLayout.createSequentialGroup()
+                            .addComponent(changeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(45, 45, 45))
+                        .addComponent(valueCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(userDeetsPaneLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(GoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(FirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(FirstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(changeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ChangeDetailsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ViewOrganizationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -82,10 +216,60 @@ public class userDeets extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        userDeetsPane.getAccessibleContext().setAccessibleParent(null);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ChangeDetailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeDetailsButtonActionPerformed
+
+        changeLabel.setVisible(true);
+        valueCombo.setVisible(true);
+        GoButton.setVisible(true);
+      
+    }//GEN-LAST:event_ChangeDetailsButtonActionPerformed
+
+    private void ViewOrganizationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewOrganizationButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ViewOrganizationButtonActionPerformed
+
+    private void valueComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valueComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_valueComboActionPerformed
+
+    private void GoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoButtonActionPerformed
+        // TODO add your handling code here:
+        String selected=valueCombo.getSelectedItem().toString();
+        if(selected=="first name"){
+            
+            FirstName.setVisible(true);
+        FirstNameField.setVisible(true);
+        }
+        else if (selected=="last name"){
+             FirstName.setVisible(false);
+        FirstNameField.setVisible(false);
+            FirstName.setText(selected);
+             FirstName.setVisible(true);
+            FirstNameField.setVisible(true);
+        }
+         else if (selected=="password"){
+             FirstName.setVisible(false);
+        FirstNameField.setVisible(false);
+            FirstName.setText(selected);
+            FirstName.setVisible(true);
+            FirstNameField.setVisible(true);
+        }
+         else{
+              FirstName.setVisible(false);
+        FirstNameField.setVisible(false);
+            FirstName.setText(selected);
+            FirstName.setVisible(true);
+            FirstNameField.setVisible(true);
+         }
+    }//GEN-LAST:event_GoButtonActionPerformed
+
+    private void changeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeButtonActionPerformed
+        // TODO add your handling code here:
+       String text=FirstNameField.getText();
+    }//GEN-LAST:event_changeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -96,8 +280,17 @@ public class userDeets extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ChangeDetailsButton;
+    private javax.swing.JLabel FirstName;
+    private javax.swing.JTextField FirstNameField;
+    private javax.swing.JButton GoButton;
     private javax.swing.JLabel TaskNameLabel;
     private javax.swing.JLabel TaskNameLabel1;
+    private javax.swing.JButton ViewOrganizationButton;
+    private javax.swing.JButton changeButton;
+    private javax.swing.JLabel changeLabel;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel userDeetsPane;
+    private javax.swing.JComboBox<String> valueCombo;
     // End of variables declaration//GEN-END:variables
 }

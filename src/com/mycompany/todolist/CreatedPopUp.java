@@ -4,14 +4,14 @@ package com.mycompany.todolist;
 
 public class CreatedPopUp extends javax.swing.JFrame {
 
+    String organization;
+    String role;
     
-    SignUp parent= new SignUp();
-    
-    public CreatedPopUp(SignUp parent) {
+    public CreatedPopUp(String organization) {
         
         initComponents();
-        this.parent=parent;
-        setLocationRelativeTo(parent);
+        this.organization=organization;
+        this.role= role;
     }
 
     /**
@@ -30,7 +30,7 @@ public class CreatedPopUp extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         CreatedAccountPanel.setBackground(new java.awt.Color(204, 204, 255));
-        CreatedAccountPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        CreatedAccountPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 8));
 
         CreatedLabel.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         CreatedLabel.setText("Your Account was created successfully!");
@@ -57,7 +57,7 @@ public class CreatedPopUp extends javax.swing.JFrame {
                     .addGroup(CreatedAccountPanelLayout.createSequentialGroup()
                         .addGap(190, 190, 190)
                         .addComponent(OKButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         CreatedAccountPanelLayout.setVerticalGroup(
             CreatedAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -66,7 +66,7 @@ public class CreatedPopUp extends javax.swing.JFrame {
                 .addComponent(CreatedLabel)
                 .addGap(60, 60, 60)
                 .addComponent(OKButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -85,8 +85,6 @@ public class CreatedPopUp extends javax.swing.JFrame {
 
     private void OKButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKButtonActionPerformed
         // TODO add your handling code here:
-        
-        
         
         setVisible(false);
         new Login().setVisible(true);

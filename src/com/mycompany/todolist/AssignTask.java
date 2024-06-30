@@ -8,18 +8,16 @@ import java.awt.*;
 import javax.swing.*;
 import java.sql.*;
 
-/**
- *
- * @author Muhammad Rafay
- */
 public class AssignTask extends javax.swing.JFrame {
 
     /**
      * Creates new form AssignTask
      */
     String username;
+    String organization;
+    String role;
     
-    public AssignTask(String username) {
+    public AssignTask(String username, String organization, String role) {
         initComponents();
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -30,23 +28,26 @@ public class AssignTask extends javax.swing.JFrame {
         ErrorText.setHorizontalAlignment(ErrorText.CENTER);
         
         this.username=username;
+        this.organization=organization;
+        this.role=role;
         
        
         try{
             
             Conn c= new Conn();
             
-            String query= "select username from signup";
+            String query= "call getOrganizationUsers('"+organization+"','"+role+"','"+username+"');";
             
             AssignToCombo.removeAllItems();
             
             ResultSet rs= c.s.executeQuery(query);
             
              while (rs.next()) {
-            String user = rs.getString("username");
+            String user = rs.getString("username"); //i wanna search the other way to do this
+            AssignToCombo.addItem("");
             AssignToCombo.addItem(user);
             
-            AssignToCombo.removeItem(username);
+            
         }
         }
         catch(Exception e){
@@ -79,7 +80,7 @@ public class AssignTask extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         SignUpPane.setBackground(new java.awt.Color(204, 204, 255));
-        SignUpPane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 51, 51), 8, true));
+        SignUpPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 8));
 
         TaskNameLabel.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         TaskNameLabel.setText("Task Name");
@@ -111,7 +112,7 @@ public class AssignTask extends javax.swing.JFrame {
         TaskDescriptionLabel.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         TaskDescriptionLabel.setText("Task Description");
 
-        AssignToCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "self", " " }));
+        AssignToCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         AssignToCombo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         AssignToCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,7 +191,7 @@ public class AssignTask extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(SignUpPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -208,20 +209,20 @@ public class AssignTask extends javax.swing.JFrame {
         String taskname= Taskname.getText();
         String dis= DescriptionField.getText();
         String dueDate= DateTimeField.getText();
-        String assignedTo= AssignToCombo.getItemAt(0);
+        String assignedTo= AssignToCombo.getSelectedItem().toString();
 
         if(taskname.isEmpty()){
 
             ErrorText.setText("Enter a Task Name!");
         }
         else if(dis.isEmpty()){
-            ErrorText.setText("Enter a Description for the Task!");
+            ErrorText.setText("Enter a Description for the Task!"); 
         }
         else if(dueDate.isEmpty()){
 
             ErrorText.setText("Enter a Date/Time for task completion!");
         }
-        else if(assignedTo==null){
+        else if(assignedTo==""){
             
             ErrorText.setText("Choose a user to assign task !");
         }
@@ -232,7 +233,7 @@ public class AssignTask extends javax.swing.JFrame {
                 c.s.executeUpdate(query);
 
                 setVisible(false);
-                new HomePage(username).setVisible(true);
+                new HomePage(username, organization, role).setVisible(true);
             }
             catch(Exception e){
                 System.out.println(e);

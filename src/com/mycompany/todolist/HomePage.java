@@ -23,8 +23,10 @@ public class HomePage extends javax.swing.JFrame {
     Image i2= i1.getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
     ImageIcon i3 = new ImageIcon(i2);
 
-    
+String fullName;
     String username;
+    String organization;
+    String role;
    int top;
    int top2;
    Tasks[] task;
@@ -40,8 +42,11 @@ public class HomePage extends javax.swing.JFrame {
     /**
      * Creates new form HomePage
      */
-    public HomePage(String username) {
+    public HomePage(String username, String organization, String role) {
+
         this.username=username;
+        this.organization=organization;
+        this.role=role;
         this.top=-1;
          this.top2=-1;
          
@@ -53,30 +58,26 @@ public class HomePage extends javax.swing.JFrame {
         this.Assigned=  new javax.swing.JLabel[]{AssignedBy,AssignedBy1,AssignedBy2,AssignedBy3,AssignedBy4,AssignedBy5,AssignedBy6,AssignedBy7};
 
         task= new Tasks[8];
-               assignedtask = new Tasks[8];
+        assignedtask = new Tasks[8];
                
         setAllTasksInvisible();
-               
-                TaskDone.setVisible(true);
-        TaskDone1.setVisible(true);
-        TaskDone2.setVisible(true);
-        TaskDone3.setVisible(true);
-        TaskDone4.setVisible(true);
-        TaskDone5.setVisible(true);
-        TaskDone6.setVisible(true);
-        TaskDone7.setVisible(true);
                
                try{
             
             Conn c= new Conn();
+            Conn c2= new Conn();
             
             String query= "select * from task where assignedTo = '"+username+"'";
+            String fullNameQuery="select fullName from userdata where username='"+username+"' ";
             
             
             ResultSet rs= c.s.executeQuery(query);
-           
-
+            ResultSet rs2= c2.s.executeQuery(fullNameQuery);
+            while(rs2.next()){
+               fullName=rs2.getString("fullName");
             
+            }
+            userIcon.setText(fullName);
              while (rs.next()) {
                  
             String taskname = rs.getString("taskname");
@@ -109,6 +110,17 @@ public class HomePage extends javax.swing.JFrame {
         setLocation((screenSize.width - getWidth()) / 2,
                            (screenSize.height - getHeight()) / 2);
 
+    }
+
+    private HomePage() {
+       initComponents();
+        
+        // Get the screen size
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+        // Set the location of the JFrame in the center of the screen
+        setLocation((screenSize.width - getWidth()) / 2,
+                           (screenSize.height - getHeight()) / 2);
     }
 
     /**
@@ -183,7 +195,7 @@ public class HomePage extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         loginPagePane.setBackground(new java.awt.Color(253, 242, 255));
-        loginPagePane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        loginPagePane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 8));
 
         WelcomeLabel.setFont(new java.awt.Font("Times New Roman", 0, 72)); // NOI18N
         WelcomeLabel.setText("TODO LIST");
@@ -194,7 +206,7 @@ public class HomePage extends javax.swing.JFrame {
 
         FooterLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         FooterLabel.setForeground(new java.awt.Color(255, 255, 255));
-        FooterLabel.setText("© TODO LIST APP BY SHAFAY");
+        FooterLabel.setText("© TODO LIST APP BY SHAFAY AND SHAEEL");
 
         javax.swing.GroupLayout FooterPanelLayout = new javax.swing.GroupLayout(FooterPanel);
         FooterPanel.setLayout(FooterPanelLayout);
@@ -214,11 +226,11 @@ public class HomePage extends javax.swing.JFrame {
         );
 
         userIcon.setBackground(new java.awt.Color(255, 255, 255));
-        userIcon.setText(username);
+        userIcon.setText(fullName);
         userIcon.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
         userIcon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        userIcon.setMaximumSize(new java.awt.Dimension(72, 30));
-        userIcon.setMinimumSize(new java.awt.Dimension(72, 30));
+        userIcon.setMaximumSize(new java.awt.Dimension(150, 30));
+        userIcon.setMinimumSize(new java.awt.Dimension(150, 30));
         userIcon.setPreferredSize(new java.awt.Dimension(150, 50));
         userIcon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -376,7 +388,7 @@ public class HomePage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AssignedBy, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(TaskDate, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                .addComponent(TaskDate, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(Info)
                 .addGap(18, 18, 18)
@@ -851,9 +863,9 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPagePaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(WelcomeLabel)
-                .addGap(160, 160, 160)
-                .addComponent(userIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86))
+                .addGap(67, 67, 67)
+                .addComponent(userIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPagePaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(welcomeAndFormSeperator, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -889,7 +901,7 @@ public class HomePage extends javax.swing.JFrame {
                 .addComponent(Task7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Task8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(FooterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1035,7 +1047,7 @@ PersonalTasks.setMinimumSize(new java.awt.Dimension(151, 32));
 PersonalTasks.setPreferredSize(new java.awt.Dimension(151, 33));      
 
             setVisible(false);
-            new  HomePage(username).setVisible(true);
+            new  HomePage().setVisible(true);
           
 
     }//GEN-LAST:event_PersonalTasksActionPerformed
@@ -1183,7 +1195,7 @@ if(isFull2())
 
 else{
         setVisible(false);
-        new AssignTask(username).setVisible(true);
+        new AssignTask(username,organization,role).setVisible(true);
     }
     }//GEN-LAST:event_AssignTaskActionPerformed
 
@@ -1263,7 +1275,7 @@ userIcon.setFont(new java.awt.Font("Segoe UI", 3, 21));
 
     private void userIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userIconMouseClicked
         // TODO add your handling code here:
-        new userDeets(username).setVisible(true);
+        new userDeets(username,fullName).setVisible(true);
     }//GEN-LAST:event_userIconMouseClicked
 
    private void pop(int index, String text) {

@@ -9,11 +9,25 @@ import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
+    String organization;
+    String role;
     /**
      * Creates new form LoginJFrame
      */
-    public Login() {
+    public Login(){
         initComponents();
+        
+        // Get the screen size
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+        // Set the location of the JFrame in the center of the screen
+        setLocation((screenSize.width - getWidth()) / 2,
+                           (screenSize.height - getHeight()) / 2);
+    }
+    public Login(String organization,String role) {
+        initComponents();
+        this.organization=organization;
+        this.role=role;
         // Get the screen size
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -31,6 +45,7 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         loginPagePane = new javax.swing.JPanel();
         WelcomeLabel = new javax.swing.JLabel();
         welcomeAndFormSeperator = new javax.swing.JSeparator();
@@ -42,14 +57,17 @@ public class Login extends javax.swing.JFrame {
         LoginButton = new javax.swing.JButton();
         RegisterLabel = new javax.swing.JLabel();
         SignupButton = new javax.swing.JButton();
+        ErrorText = new javax.swing.JLabel();
         FooterPanel = new javax.swing.JPanel();
         FooterLabel = new javax.swing.JLabel();
+
+        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Todo List App");
 
         loginPagePane.setBackground(new java.awt.Color(251, 242, 255));
-        loginPagePane.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        loginPagePane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 8));
 
         WelcomeLabel.setFont(new java.awt.Font("SimSun", 1, 48)); // NOI18N
         WelcomeLabel.setText("LOG IN");
@@ -95,6 +113,10 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        ErrorText.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        ErrorText.setForeground(new java.awt.Color(255, 0, 0));
+        ErrorText.setAlignmentX(6.0F);
+
         javax.swing.GroupLayout LoginPaneLayout = new javax.swing.GroupLayout(LoginPane);
         LoginPane.setLayout(LoginPaneLayout);
         LoginPaneLayout.setHorizontalGroup(
@@ -103,18 +125,22 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(LoginPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(LoginPaneLayout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addGroup(LoginPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(PasswordLabel)
-                            .addComponent(UsernameLabel)
-                            .addComponent(UsernameField)
-                            .addComponent(PasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)))
+                        .addGroup(LoginPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(LoginPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(PasswordLabel)
+                                .addComponent(UsernameLabel)
+                                .addComponent(UsernameField)
+                                .addComponent(PasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))
+                            .addGroup(LoginPaneLayout.createSequentialGroup()
+                                .addComponent(RegisterLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SignupButton))
+                            .addGroup(LoginPaneLayout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(ErrorText, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(LoginPaneLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(LoginPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(RegisterLabel)
-                            .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SignupButton)))
+                        .addGap(119, 119, 119)
+                        .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         LoginPaneLayout.setVerticalGroup(
@@ -128,29 +154,31 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(PasswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(22, 22, 22)
+                .addComponent(ErrorText, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(32, 32, 32)
                 .addGroup(LoginPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(RegisterLabel)
                     .addComponent(SignupButton))
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addGap(44, 44, 44))
         );
 
         FooterPanel.setBackground(new java.awt.Color(0, 0, 0));
 
         FooterLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         FooterLabel.setForeground(new java.awt.Color(255, 255, 255));
-        FooterLabel.setText("© TODO LIST APP BY SHAFAY!");
+        FooterLabel.setText("© TODO LIST APP BY SHAFAY AND SHAEEL!");
 
         javax.swing.GroupLayout FooterPanelLayout = new javax.swing.GroupLayout(FooterPanel);
         FooterPanel.setLayout(FooterPanelLayout);
         FooterPanelLayout.setHorizontalGroup(
             FooterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FooterPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(FooterPanelLayout.createSequentialGroup()
+                .addGap(301, 301, 301)
                 .addComponent(FooterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(269, 269, 269))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         FooterPanelLayout.setVerticalGroup(
             FooterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,7 +205,7 @@ public class Login extends javax.swing.JFrame {
                                 .addGap(33, 33, 33)
                                 .addComponent(WelcomeLabel))
                             .addComponent(welcomeAndFormSeperator, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(332, Short.MAX_VALUE))
+                .addContainerGap(318, Short.MAX_VALUE))
         );
         loginPagePaneLayout.setVerticalGroup(
             loginPagePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,7 +216,7 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(welcomeAndFormSeperator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(LoginPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
                 .addComponent(FooterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -218,10 +246,10 @@ public class Login extends javax.swing.JFrame {
             ResultSet rs= c.s.executeQuery(query);
              if (rs.next()) {
                  setVisible(false);
-                 new HomePage(username).setVisible(true);
+                 new HomePage(username,organization, role).setVisible(true);
              }
              else{
-                  new InvalidLoginPopUp().setVisible(true);
+                  ErrorText.setText("Invalid Username or Password!");
              }
          }
          catch(Exception e){
@@ -273,6 +301,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel ErrorText;
     private javax.swing.JLabel FooterLabel;
     private javax.swing.JPanel FooterPanel;
     private javax.swing.JButton LoginButton;
@@ -284,6 +313,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField UsernameField;
     private javax.swing.JLabel UsernameLabel;
     private javax.swing.JLabel WelcomeLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel loginPagePane;
     private javax.swing.JSeparator welcomeAndFormSeperator;
     // End of variables declaration//GEN-END:variables
