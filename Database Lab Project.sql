@@ -12,7 +12,6 @@ create table organizations (username varchar (20), company varchar(20), role var
  
  insert into task values ("shaeel","teach","teach me probability and statistics before exams","9th july 2024","waniya");
   insert into task values ("hassan","get project","get a new node.js project from the client","7th june 2024","shafay");
-  insert into organizations values ("waniya","SellSoft","junior dev");
 
   
   alter table userdata add dateOfJoining date;
@@ -26,7 +25,7 @@ ALTER TABLE userdata ADD PRIMARY KEY (username);
   alter table organizations drop foreign key organizations_ibfk_1;
   alter table task add foreign key(assignedBy) references userdata(username) ON UPDATE CASCADE ON DELETE CASCADE;
   alter table organizations add foreign key(username) references userdata(username) ON UPDATE CASCADE ON DELETE CASCADE;
-
+set sql_safe_updates=0;
 
   delimiter $$
   create procedure getOrganizationUsers(in organization varchar(20), in userRole varchar (20), in currentUser varchar (20))
@@ -50,24 +49,9 @@ END $$
   delimiter ;
   call getOrganizationUsers('SellSoft','junior dev','hamza');
   
-  delimiter $$
-  create trigger updateFullName 
-  before UPDATE on userdata for each row 
-  begin
-  set NEW.fullName = concat(NEW.firstName,' ',NEW.lastName);
-  end $$
-  delimiter ;
-  
-  delimiter $$
-  create trigger insertFullName
-  before INSERT on userdata for each row
-  begin
-  set NEW.fullName = concat(NEW.firstName,' ',NEW.lastName);
-  end $$
-  delimiter ;
+ 
   
 DELIMITER $$
-
 CREATE PROCEDURE insertDataIntoTables(
     IN firstName VARCHAR(255),
     IN lastName VARCHAR(255),
@@ -91,8 +75,26 @@ BEGIN
 END $$
 
 DELIMITER ;
+
+/* TRIGGERS */
+ delimiter $$
+  create trigger updateFullName 
+  before UPDATE on userdata for each row 
+  begin
+  set NEW.fullName = concat(NEW.firstName,' ',NEW.lastName);
+  end $$
+  delimiter ;
+  
+  delimiter $$
+  create trigger insertFullName
+  before INSERT on userdata for each row
+  begin
+  set NEW.fullName = concat(NEW.firstName,' ',NEW.lastName);
+  end $$
+  delimiter ;
+  
 drop procedure insertDataIntoTables;
   select * from login;
   select * from userdata;
   select * from task;
-  select * from organizations;
+  select * from organizations;  

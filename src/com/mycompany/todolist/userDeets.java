@@ -4,8 +4,12 @@
  */
 package com.mycompany.todolist;
 
+import com.mysql.cj.xdevapi.Table;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -32,7 +36,7 @@ public class userDeets extends javax.swing.JFrame {
         
         valueCombo.addItem("first name");
         valueCombo.addItem("last name");
-                valueCombo.addItem("password");
+        valueCombo.addItem("password");
         valueCombo.addItem("email");
         
         changeLabel.setVisible(false);
@@ -41,6 +45,8 @@ public class userDeets extends javax.swing.JFrame {
         changeButton.setVisible(false);
         FirstName.setVisible(false);
         FirstNameField.setVisible(false);
+        
+        
     }
 
     /**
@@ -180,7 +186,6 @@ public class userDeets extends javax.swing.JFrame {
                 .addComponent(TaskNameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(userDeetsPaneLayout.createSequentialGroup()
@@ -238,39 +243,87 @@ public class userDeets extends javax.swing.JFrame {
     private void GoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoButtonActionPerformed
         // TODO add your handling code here:
         String selected=valueCombo.getSelectedItem().toString();
-        if(selected=="first name"){
-            
-            FirstName.setVisible(true);
-        FirstNameField.setVisible(true);
-        }
-        else if (selected=="last name"){
-             FirstName.setVisible(false);
+         FirstName.setVisible(false);
         FirstNameField.setVisible(false);
-            FirstName.setText(selected);
+        
+        if(selected=="first name"){
+           
+            FirstNameField.setText("");
+            FirstName.setText("New First Name");
              FirstName.setVisible(true);
             FirstNameField.setVisible(true);
+            changeButton.setVisible(true);
+        }
+        else if (selected=="last name"){
+            
+            FirstNameField.setText("");
+            FirstName.setText("New Last Name");
+             FirstName.setVisible(true);
+            FirstNameField.setVisible(true);
+            changeButton.setVisible(true);
         }
          else if (selected=="password"){
-             FirstName.setVisible(false);
-        FirstNameField.setVisible(false);
-            FirstName.setText(selected);
+           
+             FirstNameField.setText("");
+            FirstName.setText("New Password");
             FirstName.setVisible(true);
             FirstNameField.setVisible(true);
+            changeButton.setVisible(true);
         }
-         else{
-              FirstName.setVisible(false);
-        FirstNameField.setVisible(false);
-            FirstName.setText(selected);
+                 else if (selected=="email"){
+            
+                     FirstNameField.setText("");
+            FirstName.setText("New Email");
             FirstName.setVisible(true);
             FirstNameField.setVisible(true);
+            changeButton.setVisible(true);
          }
+        
     }//GEN-LAST:event_GoButtonActionPerformed
 
     private void changeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeButtonActionPerformed
-        // TODO add your handling code here:
-       String text=FirstNameField.getText();
+       FirstName.setVisible(false);
+        FirstNameField.setVisible(false);
+        changeButton.setVisible(false);
+       String newValue=FirstNameField.getText();
+       String label=FirstName.getText().toString();
+        System.out.println(label);
+       if(label=="New First Name"){
+           updateData("firstName",newValue);
+       }
+       else if(label=="New Last Name"){
+           updateData("lastName",newValue);
+       }
+       else if(label=="New Password"){
+           updateData("pass",newValue);
+       }
+       else{
+           updateData("email",newValue);
+       }
     }//GEN-LAST:event_changeButtonActionPerformed
 
+    void updateData(String field,String newValue){
+        
+        try {
+            
+            if(field=="pass"){
+                String updateQuery1="update userdata set "+field+"='"+newValue+"' where username='"+username+"' ";
+                String updateQuery2="update login set "+field+"='"+newValue+"' where username='"+username+"' ";
+            Conn c= new Conn();
+            c.s.executeUpdate(updateQuery1);
+             c.s.executeUpdate(updateQuery2);
+            }
+            else{
+                 String updateQuery="update userdata set "+field+"='"+newValue+"' where username='"+username+"' ";
+                Conn c= new Conn();
+                c.s.executeUpdate(updateQuery);
+            }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(userDeets.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
     /**
      * @param args the command line arguments
      */
