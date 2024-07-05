@@ -244,6 +244,8 @@ public class Login extends javax.swing.JFrame {
          
          try{
             ResultSet rs= c.s.executeQuery(query);
+            
+            //this rs.next method checks if it fetched a row which simply means that yes there is a user with that pass in the database!
              if (rs.next()) {
                  setVisible(false);
                  new HomePage(username,organization, role).setVisible(true);
