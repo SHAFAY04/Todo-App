@@ -4,10 +4,8 @@ package com.mycompany.todolist;
 
 public class TodoList {
 
-    String organization;
-    
-    public TodoList(String organization) {
-        this.organization=organization;
+    public TodoList() {
+        
     }
 
     public static void main(String[] args) {

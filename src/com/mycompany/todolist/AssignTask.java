@@ -17,6 +17,7 @@ public class AssignTask extends javax.swing.JFrame {
     String organization;
     String role;
     
+    
     public AssignTask(String username, String organization, String role) {
         initComponents();
         
@@ -30,6 +31,10 @@ public class AssignTask extends javax.swing.JFrame {
         this.username=username;
         this.organization=organization;
         this.role=role;
+        System.out.println(username);
+         System.out.println(organization);
+          System.out.println(role);
+        
         
        
         try{
@@ -39,8 +44,13 @@ public class AssignTask extends javax.swing.JFrame {
             String query= "call getOrganizationUsers('"+organization+"','"+role+"','"+username+"');";
             ResultSet rs= c.s.executeQuery(query);
             
-            String user = rs.getString("username");
+           
+            
+            while(rs.next()){
+                
+                 String user = rs.getString("username");
             AssignToCombo.addItem(user);
+            }
         
     
         }
@@ -227,7 +237,7 @@ public class AssignTask extends javax.swing.JFrame {
                 c.s.executeUpdate(query);
 
                 setVisible(false);
-                new HomePage(username, organization, role).setVisible(true);
+                new HomePage(username).setVisible(true);
             }
             catch(Exception e){
                 System.out.println(e);

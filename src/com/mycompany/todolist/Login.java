@@ -9,25 +9,13 @@ import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
-    String organization;
-    String role;
+  
     /**
      * Creates new form LoginJFrame
      */
     public Login(){
         initComponents();
         
-        // Get the screen size
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
-        // Set the location of the JFrame in the center of the screen
-        setLocation((screenSize.width - getWidth()) / 2,
-                           (screenSize.height - getHeight()) / 2);
-    }
-    public Login(String organization,String role) {
-        initComponents();
-        this.organization=organization;
-        this.role=role;
         // Get the screen size
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -248,7 +236,7 @@ public class Login extends javax.swing.JFrame {
             //this rs.next method checks if it fetched a row which simply means that yes there is a user with that pass in the database!
              if (rs.next()) {
                  setVisible(false);
-                 new HomePage(username,organization, role).setVisible(true);
+                 new HomePage(username).setVisible(true);
              }
              else{
                   ErrorText.setText("Invalid Username or Password!");

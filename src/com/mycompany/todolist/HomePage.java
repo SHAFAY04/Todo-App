@@ -1,6 +1,7 @@
 
 package com.mycompany.todolist;
 
+import com.mysql.cj.protocol.Resultset;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -25,8 +26,6 @@ public class HomePage extends javax.swing.JFrame {
 
 String fullName;
     String username;
-    String organization;
-    String role;
    int top;
    int top2;
    Tasks[] task;
@@ -38,18 +37,19 @@ String fullName;
    javax.swing.JLabel[] Assigned= new javax.swing.JLabel[8];
    String[] discriptions= new String[8];
    String assignedBy;
+   String organization;
+    String role;
    
     /**
      * Creates new form HomePage
      */
-    public HomePage(String username, String organization, String role) {
+    public HomePage(String username) {
 
         this.username=username;
-        this.organization=organization;
-        this.role=role;
         this.top=-1;
          this.top2=-1;
          
+       
         initComponents();
         
         this.Tasks = new javax.swing.JPanel[]{Task1, Task2, Task3, Task4, Task5, Task6, Task7, Task8};
@@ -66,15 +66,23 @@ String fullName;
             
             Conn c= new Conn();
             Conn c2= new Conn();
-            
+            Conn c3= new Conn();
+
             String query= "select * from task where assignedTo = '"+username+"'";
             String fullNameQuery="select fullName from userdata where username='"+username+"' ";
-            
+            String Companyquery="select company,role from organizations where username='"+username+"' ";
+
             
             ResultSet rs= c.s.executeQuery(query);
             ResultSet rs2= c2.s.executeQuery(fullNameQuery);
+             ResultSet rs3= c3.s.executeQuery(Companyquery);
             while(rs2.next()){
                fullName=rs2.getString("fullName");
+            
+            }
+            while(rs3.next()){
+              organization=rs3.getString("company");
+              role=rs3.getString("role");
             
             }
             userIcon.setText(fullName);
@@ -1037,7 +1045,7 @@ PersonalTasks.setMinimumSize(new java.awt.Dimension(151, 32));
 PersonalTasks.setPreferredSize(new java.awt.Dimension(151, 33));      
 
             setVisible(false);
-                             new HomePage(username,organization, role).setVisible(true);
+                             new HomePage(username).setVisible(true);
 
           
 

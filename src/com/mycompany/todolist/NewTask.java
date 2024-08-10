@@ -196,7 +196,7 @@ public class NewTask extends javax.swing.JFrame {
           
         
             setVisible(false);
-            new HomePage(username, organization, role).setVisible(true);
+            new HomePage(username).setVisible(true);
         }
         catch(Exception e){
             System.out.println(e);
