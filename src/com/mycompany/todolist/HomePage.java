@@ -196,7 +196,7 @@ String fullName;
 
         FooterLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         FooterLabel.setForeground(new java.awt.Color(255, 255, 255));
-        FooterLabel.setText("© TODO LIST APP BY SHAFAY AND SHAEEL");
+        FooterLabel.setText("© TODO LIST APP BY SHAFAY!");
 
         javax.swing.GroupLayout FooterPanelLayout = new javax.swing.GroupLayout(FooterPanel);
         FooterPanel.setLayout(FooterPanelLayout);
@@ -205,14 +205,14 @@ String fullName;
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FooterPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(FooterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(392, 392, 392))
+                .addGap(322, 322, 322))
         );
         FooterPanelLayout.setVerticalGroup(
             FooterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FooterPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(FooterPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(FooterLabel)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         userIcon.setBackground(new java.awt.Color(255, 255, 255));
@@ -1266,7 +1266,7 @@ userIcon.setFont(new java.awt.Font("Segoe UI", 3, 21));
 
     private void userIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userIconMouseClicked
         // TODO add your handling code here:
-        new userDeets(username,fullName).setVisible(true);
+        new userDeets(username,fullName,organization).setVisible(true);
     }//GEN-LAST:event_userIconMouseClicked
 
    private void pop(int index, String text) {
@@ -1366,3 +1366,4 @@ userIcon.setFont(new java.awt.Font("Segoe UI", 3, 21));
         }
     }
 }
+

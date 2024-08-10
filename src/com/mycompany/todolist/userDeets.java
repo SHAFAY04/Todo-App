@@ -10,6 +10,8 @@ import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,9 +25,11 @@ public class userDeets extends javax.swing.JFrame {
     */
     String fullName;
     String username;
-    public userDeets(String username,String fullName) {
+    String company;
+    public userDeets(String username,String fullName,String company) {
         this.username=username;
         this.fullName=fullName;
+        this.company=company;
         initComponents();
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -39,6 +43,7 @@ public class userDeets extends javax.swing.JFrame {
         valueCombo.addItem("password");
         valueCombo.addItem("email");
         
+
         changeLabel.setVisible(false);
         valueCombo.setVisible(false);
         GoButton.setVisible(false);
@@ -70,6 +75,8 @@ public class userDeets extends javax.swing.JFrame {
         FirstName = new javax.swing.JLabel();
         FirstNameField = new javax.swing.JTextField();
         changeButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         TaskNameLabel.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         TaskNameLabel.setText("Task Name");
@@ -140,85 +147,104 @@ public class userDeets extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "fullName", "email", "gender", "role"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout userDeetsPaneLayout = new javax.swing.GroupLayout(userDeetsPane);
         userDeetsPane.setLayout(userDeetsPaneLayout);
         userDeetsPaneLayout.setHorizontalGroup(
             userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userDeetsPaneLayout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(userDeetsPaneLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(changeLabel))
-                    .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(TaskNameLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(19, 19, 19))
             .addGroup(userDeetsPaneLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userDeetsPaneLayout.createSequentialGroup()
+                        .addComponent(changeLabel)
+                        .addGap(27, 27, 27))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userDeetsPaneLayout.createSequentialGroup()
+                        .addComponent(valueCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(GoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(userDeetsPaneLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(userDeetsPaneLayout.createSequentialGroup()
-                        .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(userDeetsPaneLayout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(ChangeDetailsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userDeetsPaneLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(valueCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)))
-                        .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ViewOrganizationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(GoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(userDeetsPaneLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(userDeetsPaneLayout.createSequentialGroup()
-                                .addComponent(FirstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(changeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(FirstName))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(FirstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(changeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(FirstName)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userDeetsPaneLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userDeetsPaneLayout.createSequentialGroup()
+                        .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TaskNameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(174, 174, 174))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userDeetsPaneLayout.createSequentialGroup()
+                        .addComponent(ChangeDetailsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(ViewOrganizationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(198, 198, 198))))
         );
         userDeetsPaneLayout.setVerticalGroup(
             userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userDeetsPaneLayout.createSequentialGroup()
                 .addGap(76, 76, 76)
                 .addComponent(TaskNameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(userDeetsPaneLayout.createSequentialGroup()
-                            .addComponent(changeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(45, 45, 45))
-                        .addComponent(valueCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(userDeetsPaneLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(changeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(userDeetsPaneLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
-                        .addComponent(GoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(GoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(valueCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(21, 21, 21)
                 .addComponent(FirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(FirstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(changeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
-                .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ChangeDetailsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ViewOrganizationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49))
+                .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(userDeetsPaneLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(109, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userDeetsPaneLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(userDeetsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ViewOrganizationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ChangeDetailsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(userDeetsPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(userDeetsPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(userDeetsPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -233,7 +259,30 @@ public class userDeets extends javax.swing.JFrame {
     }//GEN-LAST:event_ChangeDetailsButtonActionPerformed
 
     private void ViewOrganizationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewOrganizationButtonActionPerformed
-        // TODO add your handling code here:
+     
+                
+                DefaultTableModel tbmodel= (DefaultTableModel)jTable1.getModel();
+                tbmodel.setRowCount(0);
+            try {
+                    String query="select u.fullName,u.email,u.gender,o.role from organizations o join userdata u where u.username=o.username and o.company='"+company+"' ";
+                    Conn c= new Conn();
+                    
+            ResultSet rs= c.s.executeQuery(query);
+           while(rs.next()) {
+            
+                String name= rs.getString("fullName");
+                String mail= rs.getString("email");
+                String gender= rs.getString("gender");
+                String role= rs.getString("role");
+                String tbdata[]={name,mail,gender,role};
+                tbmodel.addRow(tbdata);
+            }
+           jTable1.repaint();
+            } catch (SQLException ex) {
+                Logger.getLogger(userDeets.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                        
+    
     }//GEN-LAST:event_ViewOrganizationButtonActionPerformed
 
     private void valueComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valueComboActionPerformed
@@ -250,7 +299,7 @@ public class userDeets extends javax.swing.JFrame {
            
             FirstNameField.setText("");
             FirstName.setText("New First Name");
-             FirstName.setVisible(true);
+            FirstName.setVisible(true);
             FirstNameField.setVisible(true);
             changeButton.setVisible(true);
         }
@@ -258,13 +307,13 @@ public class userDeets extends javax.swing.JFrame {
             
             FirstNameField.setText("");
             FirstName.setText("New Last Name");
-             FirstName.setVisible(true);
+            FirstName.setVisible(true);
             FirstNameField.setVisible(true);
             changeButton.setVisible(true);
         }
          else if (selected=="password"){
            
-             FirstNameField.setText("");
+            FirstNameField.setText("");
             FirstName.setText("New Password");
             FirstName.setVisible(true);
             FirstNameField.setVisible(true);
@@ -272,7 +321,7 @@ public class userDeets extends javax.swing.JFrame {
         }
                  else if (selected=="email"){
             
-                     FirstNameField.setText("");
+            FirstNameField.setText("");
             FirstName.setText("New Email");
             FirstName.setVisible(true);
             FirstNameField.setVisible(true);
@@ -305,19 +354,19 @@ public class userDeets extends javax.swing.JFrame {
     void updateData(String field,String newValue){
         
         try {
-            
+          
             if(field=="pass"){
-                String updateQuery1="update userdata set "+field+"='"+newValue+"' where username='"+username+"' ";
-                String updateQuery2="update login set "+field+"='"+newValue+"' where username='"+username+"' ";
-            Conn c= new Conn();
-            c.s.executeUpdate(updateQuery1);
-             c.s.executeUpdate(updateQuery2);
+                String updateQuery="update login set "+field+"='"+newValue+"' where username='"+username+"' ";
+                Conn c= new Conn();
+            c.s.executeUpdate(updateQuery);
+
             }
             else{
                  String updateQuery="update userdata set "+field+"='"+newValue+"' where username='"+username+"' ";
                 Conn c= new Conn();
                 c.s.executeUpdate(updateQuery);
             }
+            
            
         } catch (SQLException ex) {
             Logger.getLogger(userDeets.class.getName()).log(Level.SEVERE, null, ex);
@@ -342,7 +391,9 @@ public class userDeets extends javax.swing.JFrame {
     private javax.swing.JButton ViewOrganizationButton;
     private javax.swing.JButton changeButton;
     private javax.swing.JLabel changeLabel;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JPanel userDeetsPane;
     private javax.swing.JComboBox<String> valueCombo;
     // End of variables declaration//GEN-END:variables

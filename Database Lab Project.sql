@@ -47,9 +47,7 @@ set sql_safe_updates=0;
     
 END $$
   delimiter ;
-  call getOrganizationUsers('SellSoft','junior dev','hamza');
-  
- 
+  call getOrganizationUsers('Folio3','senior dev','hassan nadeem');
   
 DELIMITER $$
 CREATE PROCEDURE insertDataIntoTables(
@@ -64,8 +62,8 @@ CREATE PROCEDURE insertDataIntoTables(
     IN role VARCHAR(255)
 )
 BEGIN
-    INSERT INTO userdata (firstName, lastName, fullName, username, email, pass, dateOfJoining, gender)
-    VALUES (firstName, lastName, NULL, username, email, password, date, gender);
+    INSERT INTO userdata (firstName, lastName, fullName, username, email, dateOfJoining, gender)
+    VALUES (firstName, lastName, NULL, username, email, date, gender);
 
     INSERT INTO login (username, pass)
     VALUES (username, password);
@@ -73,8 +71,8 @@ BEGIN
     INSERT INTO organizations (username, company, role)
     VALUES (username, organization, role);
 END $$
+delimiter ;
 
-DELIMITER ;
 
 /* TRIGGERS */
  delimiter $$
@@ -98,3 +96,4 @@ drop procedure insertDataIntoTables;
   select * from userdata;
   select * from task;
   select * from organizations;  
+  

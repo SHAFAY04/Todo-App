@@ -37,18 +37,12 @@ public class AssignTask extends javax.swing.JFrame {
             Conn c= new Conn();
             
             String query= "call getOrganizationUsers('"+organization+"','"+role+"','"+username+"');";
-            
-            AssignToCombo.removeAllItems();
-            
             ResultSet rs= c.s.executeQuery(query);
             
-             while (rs.next()) {
-            String user = rs.getString("username"); //i wanna search the other way to do this
-            AssignToCombo.addItem("");
+            String user = rs.getString("username");
             AssignToCombo.addItem(user);
-            
-            
-        }
+        
+    
         }
         catch(Exception e){
             System.out.println(e);

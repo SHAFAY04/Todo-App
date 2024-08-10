@@ -15,6 +15,7 @@ public class Conn {
             
             c = DriverManager.getConnection("jdbc:mysql:///todolist","root","shafay316631");
             s = c.createStatement();
+            
         }
         catch(Exception e){
             System.out.println(e);
