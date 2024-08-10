@@ -112,17 +112,7 @@ String fullName;
 
     }
 
-    private HomePage() {
-       initComponents();
-        
-        // Get the screen size
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
-        // Set the location of the JFrame in the center of the screen
-        setLocation((screenSize.width - getWidth()) / 2,
-                           (screenSize.height - getHeight()) / 2);
-    }
-
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1047,7 +1037,8 @@ PersonalTasks.setMinimumSize(new java.awt.Dimension(151, 32));
 PersonalTasks.setPreferredSize(new java.awt.Dimension(151, 33));      
 
             setVisible(false);
-            new  HomePage().setVisible(true);
+                             new HomePage(username,organization, role).setVisible(true);
+
           
 
     }//GEN-LAST:event_PersonalTasksActionPerformed
